@@ -1,5 +1,7 @@
-# Ex.No:1a  			Study of Socket Programming
+# Ex.No:1a Study of Socket Programming
 
+## name: SAKTHIVEL S
+## reg:212223220090
 ## Aim: 
 To perform a study on Socket Programming
 ## Introduction:
@@ -53,6 +55,65 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
+CLIENT:
+```
+	import socket
+	
+	# Create a socket object
+	client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	
+	# Connect to the server
+	client_socket.connect(('localhost', 8000))
+	
+	# Print the client's socket name
+	print(f"Client connected from: {client_socket.getsockname()}")
+	
+	# Receive a message from the server
+	server_message = client_socket.recv(1024).decode()
+	print(f"Received from server: {server_message}")
+	
+	# Send a message to the server
+	client_socket.send("Acknowledgement received from the client.".encode())
+	
+	# Close the connection
+	client_socket.close()
+```
+SERVER:
+```
+	import socket
+	
+	# Create a socket object
+	server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	
+	# Bind the socket to the host and port
+	server_socket.bind(('localhost', 8000))
+	
+	# Listen for incoming connections (max 1 connection)
+	server_socket.listen(1)
+	print("Server is waiting for a connection...")
+	
+	# Accept the connection
+	conn, addr = server_socket.accept()
+	print(f"Connected by {addr}")
+	
+	# Send a message to the client
+	conn.send("Hello from the server!".encode())
+	
+	# Receive a message from the client
+	data = conn.recv(1024)
+	print(f"Received from client: {data.decode()}")
+	
+	# Close the connection
+	conn.close()
+	server_socket.close()
+```
+OUTPUT:CLIENT:
+
+![image](https://github.com/user-attachments/assets/7f069e44-845b-42d1-81f8-b178171cc1c7)
+
+SERVER:
+
+![image](https://github.com/user-attachments/assets/25c0ee30-2b15-4a82-bad3-8333d374971f)
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
